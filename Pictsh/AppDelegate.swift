@@ -7,15 +7,32 @@
 //
 
 import UIKit
+import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        Parse.initializeWithConfiguration(ParseClientConfiguration(block: { (configuration: ParseMutableClientConfiguration) -> Void in
+            configuration.applicationId = "Pictsh"
+            configuration.clientKey = "iuasjdnuidajssajin75$jkasas"
+            configuration.server = "http://hidden-plateau-74761.herokuapp.com/parse"
+            
+        }))
+        
+
+        if PFUser.currentUser() != nil {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewControllerWithIdentifier("HomeNavigationController")
+            window?.rootViewController = vc
+        }
+        
         return true
     }
 
