@@ -5,6 +5,8 @@
 use_frameworks!
 
 target 'Pictsh' do
-	pod ‘Parse’
+	pod 'Parse'
+    pod 'ParseUI'
+    pod 'MBProgressHUD'
 end
 

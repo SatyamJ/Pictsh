@@ -69,6 +69,7 @@ class LoginViewController: UIViewController {
         let newUser = PFUser()
         newUser.username = usernameTextField.text
         newUser.password = passwordTextField.text
+        //newUser.
         newUser.signUpInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             if success {
                 print("New user created")
@@ -101,12 +102,24 @@ class LoginViewController: UIViewController {
         self.passwordTextField.resignFirstResponder()
     }
     
-    @IBAction func unwindToLoginScreen(sender: UIStoryboardSegue){
-        PFUser.logOut()
+    @IBAction func unwindToLoginScreenfromRegister(sender: UIStoryboardSegue){
+        /*
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("LoginViewController")
+        self.presentViewController(vc, animated: true, completion: nil)
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") //as! UIViewController
+        self.presentViewController(vc, animated: true, completion: nil)
+        
         if PFUser.currentUser() == nil {
             print("User logged out successfully")
-        }
+        }*/
+        print("unwind called")
     }
+    
+    
     
 
     /*
