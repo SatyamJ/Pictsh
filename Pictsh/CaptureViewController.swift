@@ -75,6 +75,9 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
         Post.postUserImage(self.newpostImage.image, withCaption: self.newpostCaption.text) { (success: Bool, error: NSError?) -> Void in
             if success{
                 self.showAlert("Post successful", alertMessage: "Post successful")
+                //self.dismissViewControllerAnimated(true, completion: nil)
+                self.newpostCaption.text = ""
+                self.newpostImage.image = UIImage(named: "choose")
             }else{
                 self.showAlert("Error occurred", alertMessage: "Try again")
                 print("Error while posting: \(error?.localizedDescription)")

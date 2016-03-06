@@ -18,8 +18,10 @@ class PostTableViewCell: UITableViewCell {
     
     @IBOutlet weak var postTimeInterval: UILabel!
     
-    
     @IBOutlet weak var postCaption: UILabel!
+    
+    @IBOutlet weak var userProfileImage: PFImageView!
+    
     
     var post: PFObject?{
         didSet{
@@ -34,11 +36,54 @@ class PostTableViewCell: UITableViewCell {
             if let date = post?.createdAt{
                 self.postTimeInterval.text = NSDate().offsetFrom(date)
             }
+            
+            
+            if let username = post!["author"]{
+                let query = PFQuery(className: "_User")
+                query.whereKey("username", equalTo: username)
+                
+                query.getFirstObjectInBackgroundWithBlock { (user: PFObject?, error: NSError?) -> Void in
+                    if(error == nil) {
+                        if let file = user!["media"]{
+                            self.userProfileImage.file = file as? PFFile
+                            self.userProfileImage.loadInBackground()
+                        }
+                    } else {
+                        print("user not found")
+                    }
+                }
+            }
+            
+
+            
+            
+            // fetch data asynchronously
+            /*
+            userQuery.findObjectsInBackgroundWithBlock { (user: [PFObject], error: NSError?) -> Void in
+                if let user = user {
+                    self.posts = posts
+                } else {
+                    print("Error while fetching posts: \(error?.localizedDescription)")
+                }
+            }*/
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        /*
+        var query:PFQuery=PFQuery(className: "_User");
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            if (error != nil) {
+                for(var i=0;i<objects!.count;i++){
+                    var object=objects![i] as PFObject;
+                    var name = object.objectForKey("username") as! String;
+                    print(name);
+                    
+                }
+            }
+        }*/
         // Initialization code
     }
 
