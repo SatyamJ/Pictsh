@@ -5,6 +5,19 @@
 //  Created by Satyam Jaiswal on 3/5/16.
 //  Copyright © 2016 Satyam Jaiswal. All rights reserved.
 //
+/*
+*  My Instuctors and the University have the right to build and evaluate the
+* software package for the purpose of determining my grade and program assessment
+*
+* Purpose: Fulfilling Lab final project submission of
+* SER598 - Mobile Systems course
+* This assignment demonstrates use of camera roll for uplaoding images to cloud
+*
+* @author Satyam Jaiswal Satyam.Jaiswal@asu.edu
+*         Software Engineering, ASU Poly
+*  Created by Satyam Jaiswal
+*  Copyright © 2016 Satyam Jaiswal. All rights reserved.
+*/
 
 import UIKit
 
@@ -17,7 +30,7 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let chooseImage = UITapGestureRecognizer(target: self, action: Selector("instantiateImagePicker"))
+        let chooseImage = UITapGestureRecognizer(target: self, action: #selector(CaptureViewController.instantiateImagePicker))
         self.newpostImage.addGestureRecognizer(chooseImage)
         self.newpostImage.userInteractionEnabled = true
         
@@ -77,7 +90,7 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
                 self.showAlert("Post successful", alertMessage: "Post successful")
                 //self.dismissViewControllerAnimated(true, completion: nil)
                 self.newpostCaption.text = ""
-                self.newpostImage.image = UIImage(named: "choose")
+                self.newpostImage.image = UIImage(named: "upload_photo")
             }else{
                 self.showAlert("Error occurred", alertMessage: "Try again")
                 print("Error while posting: \(error?.localizedDescription)")

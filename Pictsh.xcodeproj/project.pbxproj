@@ -16,8 +16,8 @@
 		4A7836431C8539B4001F54B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A7836411C8539B4001F54B6 /* Main.storyboard */; };
 		4A7836451C8539B4001F54B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A7836441C8539B4001F54B6 /* Assets.xcassets */; };
 		4A7836481C8539B4001F54B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A7836461C8539B4001F54B6 /* LaunchScreen.storyboard */; };
-		4A7E2A941C8BD379009F598B /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7E2A931C8BD379009F598B /* SignupViewController.swift */; };
-		4A9611711C8BC943008C514D /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9611701C8BC943008C514D /* TabBarViewController.swift */; };
+		4A7E2A941C8BD379009F598B /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7E2A931C8BD379009F598B /* EditProfileViewController.swift */; };
+		4AE050911D050AD2000CE956 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE050901D050AD2000CE956 /* TabBarViewController.swift */; };
 		F4FDCAB9232DAD80A2B03D4B /* Pods_Pictsh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FB666CCDB0029944CA0E12B /* Pods_Pictsh.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,8 +34,8 @@
 		4A7836441C8539B4001F54B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A7836471C8539B4001F54B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A7836491C8539B4001F54B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4A7E2A931C8BD379009F598B /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
-		4A9611701C8BC943008C514D /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		4A7E2A931C8BD379009F598B /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		4AE050901D050AD2000CE956 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		8FB666CCDB0029944CA0E12B /* Pods_Pictsh.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pictsh.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABEB6DBBDE615F78265D557F /* Pods-Pictsh.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pictsh.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pictsh/Pods-Pictsh.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,8 +58,8 @@
 				4A20FD5F1C8B1E4D001B3E1B /* LoginViewController.swift */,
 				4A20FD621C8B50CA001B3E1B /* HomeViewController.swift */,
 				4A20FD671C8B860B001B3E1B /* CaptureViewController.swift */,
-				4A9611701C8BC943008C514D /* TabBarViewController.swift */,
-				4A7E2A931C8BD379009F598B /* SignupViewController.swift */,
+				4A7E2A931C8BD379009F598B /* EditProfileViewController.swift */,
+				4AE050901D050AD2000CE956 /* TabBarViewController.swift */,
 			);
 			name = "view controllers";
 			sourceTree = "<group>";
@@ -93,6 +93,7 @@
 		4A78363C1C8539B4001F54B6 /* Pictsh */ = {
 			isa = PBXGroup;
 			children = (
+				4AE0508F1D05060F000CE956 /* views */,
 				4A20FD641C8B8108001B3E1B /* model */,
 				4A20FD611C8B50A7001B3E1B /* view controllers */,
 				4A78363D1C8539B4001F54B6 /* AppDelegate.swift */,
@@ -100,9 +101,16 @@
 				4A7836441C8539B4001F54B6 /* Assets.xcassets */,
 				4A7836461C8539B4001F54B6 /* LaunchScreen.storyboard */,
 				4A7836491C8539B4001F54B6 /* Info.plist */,
-				4A20FD691C8BA8CF001B3E1B /* PostTableViewCell.swift */,
 			);
 			path = Pictsh;
+			sourceTree = "<group>";
+		};
+		4AE0508F1D05060F000CE956 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				4A20FD691C8BA8CF001B3E1B /* PostTableViewCell.swift */,
+			);
+			name = views;
 			sourceTree = "<group>";
 		};
 		E409415CA2DDD7AF8674471A /* Pods */ = {
@@ -244,12 +252,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AE050911D050AD2000CE956 /* TabBarViewController.swift in Sources */,
 				4A20FD601C8B1E4D001B3E1B /* LoginViewController.swift in Sources */,
 				4A78363E1C8539B4001F54B6 /* AppDelegate.swift in Sources */,
-				4A7E2A941C8BD379009F598B /* SignupViewController.swift in Sources */,
+				4A7E2A941C8BD379009F598B /* EditProfileViewController.swift in Sources */,
 				4A20FD631C8B50CA001B3E1B /* HomeViewController.swift in Sources */,
 				4A20FD661C8B8127001B3E1B /* Post.swift in Sources */,
-				4A9611711C8BC943008C514D /* TabBarViewController.swift in Sources */,
 				4A20FD681C8B860B001B3E1B /* CaptureViewController.swift in Sources */,
 				4A20FD6A1C8BA8CF001B3E1B /* PostTableViewCell.swift in Sources */,
 			);

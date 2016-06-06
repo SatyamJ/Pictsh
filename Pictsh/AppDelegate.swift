@@ -13,8 +13,6 @@ import Parse
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
-
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -29,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if PFUser.currentUser() != nil {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewControllerWithIdentifier("TabBarController")
+            let vc = storyboard.instantiateViewControllerWithIdentifier("TabBarViewController")
             window?.rootViewController = vc
         }
         

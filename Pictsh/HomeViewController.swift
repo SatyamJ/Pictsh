@@ -6,6 +6,20 @@
 //  Copyright © 2016 Satyam Jaiswal. All rights reserved.
 //
 
+/*
+*  My Instuctors and the University have the right to build and evaluate the
+* software package for the purpose of determining my grade and program assessment
+*
+* Purpose: Fulfilling Lab final project submission of
+* SER598 - Mobile Systems course
+* This assignment demonstrates use of camera roll for uplaoding images to cloud
+*
+* @author Satyam Jaiswal Satyam.Jaiswal@asu.edu
+*         Software Engineering, ASU Poly
+*  Created by Satyam Jaiswal
+*  Copyright © 2016 Satyam Jaiswal. All rights reserved.
+*/
+
 import UIKit
 import Parse
 import MBProgressHUD
@@ -28,7 +42,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         fetchPost()
         
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(HomeViewController.refreshControlAction(_:)), forControlEvents: UIControlEvents.ValueChanged)
         tableView.insertSubview(refreshControl, atIndex: 0)
 
         // Do any additional setup after loading the view.

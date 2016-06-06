@@ -29,8 +29,8 @@ class PostTableViewCell: UITableViewCell {
             self.postImage.file = post!["media"] as? PFFile
             self.postImage.loadInBackground()
             
-            if let caption = post!["caption"]{
-                self.postCaption.text = caption as! String
+            if let caption = post!["caption"] as? String{
+                self.postCaption.text = caption
             }
             
             if let date = post?.createdAt{
@@ -53,38 +53,17 @@ class PostTableViewCell: UITableViewCell {
                     }
                 }
             }
-            
-
-            
-            
-            // fetch data asynchronously
-            /*
-            userQuery.findObjectsInBackgroundWithBlock { (user: [PFObject], error: NSError?) -> Void in
-                if let user = user {
-                    self.posts = posts
-                } else {
-                    print("Error while fetching posts: \(error?.localizedDescription)")
-                }
-            }*/
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        /*
-        var query:PFQuery=PFQuery(className: "_User");
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [PFObject]?, error: NSError?) -> Void in
-            if (error != nil) {
-                for(var i=0;i<objects!.count;i++){
-                    var object=objects![i] as PFObject;
-                    var name = object.objectForKey("username") as! String;
-                    print(name);
-                    
-                }
-            }
-        }*/
-        // Initialization code
+        
+        self.userProfileImage.layer.borderWidth = 1.0
+        self.userProfileImage.layer.masksToBounds = false
+        self.userProfileImage.layer.borderColor = UIColor.whiteColor().CGColor
+        self.userProfileImage.layer.cornerRadius = self.userProfileImage.frame.size.width/2
+        self.userProfileImage.clipsToBounds = true
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
