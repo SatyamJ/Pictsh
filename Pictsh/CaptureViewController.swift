@@ -20,6 +20,12 @@
 */
 
 import UIKit
+import Parse
+import MBProgressHUD
+
+protocol ContentSharing {
+    func updatePostCollection(post: Post)
+}
 
 class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -27,9 +33,15 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var newpostImage: UIImageView!
     
     @IBOutlet weak var newpostCaption: UITextField!
+    
+    @IBOutlet weak var shareButton: UIButton!
+    
+    static var delegate: ContentSharing?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.shareButton.enabled = false
+        
         let chooseImage = UITapGestureRecognizer(target: self, action: #selector(CaptureViewController.instantiateImagePicker))
         self.newpostImage.addGestureRecognizer(chooseImage)
         self.newpostImage.userInteractionEnabled = true
@@ -50,20 +62,17 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
         vc.delegate = self
         vc.allowsEditing = true
         vc.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        
         self.presentViewController(vc, animated: true, completion: nil)
         
     }
     
     func imagePickerController(picker: UIImagePickerController,
         didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-            // Get the image captured by the UIImagePickerController
             let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-            //let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
             let editedImage = self.resize(originalImage, newSize: CGSize(width: 300, height: 180))
             //self.newpostImage.image = originalImage
             self.newpostImage.image = editedImage
-            // Do something with the images (based on your use case)
+            self.shareButton.enabled = true
             
             
             // Dismiss UIImagePickerController to go back to your original view controller
@@ -72,7 +81,7 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func resize(image: UIImage, newSize: CGSize) -> UIImage {
         let resizeImageView = UIImageView(frame: CGRectMake(0, 0, newSize.width, newSize.height))
-        resizeImageView.contentMode = UIViewContentMode.ScaleAspectFill
+        resizeImageView.contentMode = UIViewContentMode.ScaleAspectFit
         resizeImageView.image = image
         
         UIGraphicsBeginImageContext(resizeImageView.frame.size)
@@ -85,17 +94,46 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     @IBAction func onTapShareButton(sender: AnyObject) {
         self.closeKeypad()
-        Post.postUserImage(self.newpostImage.image, withCaption: self.newpostCaption.text) { (success: Bool, error: NSError?) -> Void in
-            if success{
-                self.showAlert("Post successful", alertMessage: "Post successful")
-                //self.dismissViewControllerAnimated(true, completion: nil)
-                self.newpostCaption.text = ""
-                self.newpostImage.image = UIImage(named: "upload_photo")
-            }else{
-                self.showAlert("Error occurred", alertMessage: "Try again")
-                print("Error while posting: \(error?.localizedDescription)")
+        if self.newpostImage != UIImage(named: "upload_photo"){
+            
+            let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            hud.labelText = "sharing.."
+            hud.labelFont.fontWithSize(10)
+            
+            let post = PFObject(className: "Post")
+            
+            // Add relevant fields to the object
+            post["media"] = getPFFileFromImage(self.newpostImage.image) // PFFile column type
+            post["author"] = PFUser.currentUser()?.objectId // Pointer column type that points to PFUser
+            post["caption"] = self.newpostCaption.text
+            post["likesCount"] = 0
+            post["commentsCount"] = 0
+            
+            post.saveInBackgroundWithBlock { (success: Bool, error: NSError?) in
+                if let error = error{
+                    hud.labelText = "Error occurred"
+                    print("Upload error: \(error.localizedDescription)")
+                }else{
+                    self.newpostCaption.text = ""
+                    self.newpostImage.image = UIImage(named: "upload_photo")
+                    hud.labelText = "Posted!"
+                    self.shareButton.enabled = false
+                    CaptureViewController.delegate?.updatePostCollection(Post(pfObjectReceived: post))
+                }
+            }
+            MBProgressHUD.hideHUDForView(self.view, animated: true)
+        }
+    }
+    
+    func getPFFileFromImage(image: UIImage?) -> PFFile? {
+        // check if image is not nil
+        if let image = image {
+            // get image data and check if that is not nil
+            if let imageData = UIImagePNGRepresentation(image) {
+                return PFFile(name: "image.png", data: imageData)
             }
         }
+        return nil
     }
     
     func showAlert(alertTitle: String, alertMessage: String){

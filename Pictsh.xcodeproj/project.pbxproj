@@ -17,6 +17,7 @@
 		4A7836451C8539B4001F54B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A7836441C8539B4001F54B6 /* Assets.xcassets */; };
 		4A7836481C8539B4001F54B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A7836461C8539B4001F54B6 /* LaunchScreen.storyboard */; };
 		4A7E2A941C8BD379009F598B /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7E2A931C8BD379009F598B /* EditProfileViewController.swift */; };
+		4AC6DC001D0650AB00F973C5 /* PictshClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC6DBFF1D0650AB00F973C5 /* PictshClient.swift */; };
 		4AE050911D050AD2000CE956 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE050901D050AD2000CE956 /* TabBarViewController.swift */; };
 		F4FDCAB9232DAD80A2B03D4B /* Pods_Pictsh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FB666CCDB0029944CA0E12B /* Pods_Pictsh.framework */; };
 /* End PBXBuildFile section */
@@ -35,6 +36,7 @@
 		4A7836471C8539B4001F54B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A7836491C8539B4001F54B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A7E2A931C8BD379009F598B /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		4AC6DBFF1D0650AB00F973C5 /* PictshClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictshClient.swift; sourceTree = "<group>"; };
 		4AE050901D050AD2000CE956 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		8FB666CCDB0029944CA0E12B /* Pods_Pictsh.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pictsh.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABEB6DBBDE615F78265D557F /* Pods-Pictsh.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pictsh.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pictsh/Pods-Pictsh.debug.xcconfig"; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 		4A78363C1C8539B4001F54B6 /* Pictsh */ = {
 			isa = PBXGroup;
 			children = (
+				4AC6DBFE1D06508500F973C5 /* ClientAPI */,
 				4AE0508F1D05060F000CE956 /* views */,
 				4A20FD641C8B8108001B3E1B /* model */,
 				4A20FD611C8B50A7001B3E1B /* view controllers */,
@@ -103,6 +106,14 @@
 				4A7836491C8539B4001F54B6 /* Info.plist */,
 			);
 			path = Pictsh;
+			sourceTree = "<group>";
+		};
+		4AC6DBFE1D06508500F973C5 /* ClientAPI */ = {
+			isa = PBXGroup;
+			children = (
+				4AC6DBFF1D0650AB00F973C5 /* PictshClient.swift */,
+			);
+			name = ClientAPI;
 			sourceTree = "<group>";
 		};
 		4AE0508F1D05060F000CE956 /* views */ = {
@@ -252,6 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AC6DC001D0650AB00F973C5 /* PictshClient.swift in Sources */,
 				4AE050911D050AD2000CE956 /* TabBarViewController.swift in Sources */,
 				4A20FD601C8B1E4D001B3E1B /* LoginViewController.swift in Sources */,
 				4A78363E1C8539B4001F54B6 /* AppDelegate.swift in Sources */,

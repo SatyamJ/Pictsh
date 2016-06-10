@@ -23,35 +23,37 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var userProfileImage: PFImageView!
     
     
-    var post: PFObject?{
+    var post: Post?{
         didSet{
-            self.postUsername.text = "\(post!["author"])"
-            self.postImage.file = post!["media"] as? PFFile
-            self.postImage.loadInBackground()
+            let query = PFUser.query()
+            query?.getObjectInBackgroundWithId((post?.author)!, block: { (user: PFObject?, error: NSError?) in
+                if let postAuthor = user as? PFUser{
+                    if let postAuthorUsername = postAuthor.username{
+                        self.postUsername.text = postAuthorUsername
+                    }
+                    
+                    if let dpFile = postAuthor["display_picture"] as? PFFile{
+                        self.userProfileImage.file = dpFile
+                        self.userProfileImage.loadInBackground()
+                    }else{
+                        self.userProfileImage.image = UIImage(named: "Generic_Avatar")
+                    }
+                }
+            })
             
-            if let caption = post!["caption"] as? String{
+            if let postMedia = post?.media{
+                self.postImage.file = postMedia
+                self.postImage.loadInBackground()
+            }
+            
+            
+            if let caption = post?.caption{
                 self.postCaption.text = caption
             }
+ 
             
             if let date = post?.createdAt{
                 self.postTimeInterval.text = NSDate().offsetFrom(date)
-            }
-            
-            
-            if let username = post!["author"]{
-                let query = PFQuery(className: "_User")
-                query.whereKey("username", equalTo: username)
-                
-                query.getFirstObjectInBackgroundWithBlock { (user: PFObject?, error: NSError?) -> Void in
-                    if(error == nil) {
-                        if let file = user!["media"]{
-                            self.userProfileImage.file = file as? PFFile
-                            self.userProfileImage.loadInBackground()
-                        }
-                    } else {
-                        print("user not found")
-                    }
-                }
             }
         }
     }

@@ -36,6 +36,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var newPoster: PFImageView!
     
     @IBOutlet weak var bioTextView: UITextView!
+    
     var placeholderLabel : UILabel!
     
     override func viewDidLoad() {
@@ -44,8 +45,8 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         let chooseDP = UITapGestureRecognizer(target: self, action: #selector(EditProfileViewController.instantiateImagePicker))
         self.newPoster.addGestureRecognizer(chooseDP)
         self.newPoster.userInteractionEnabled = true
-        configureTextView()
         setupUI()
+        configureTextView()
     }
     
     func setupUI(){
@@ -80,7 +81,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         }
         
         
-        if let image = PFUser.currentUser()!["media"] as? PFFile{
+        if let image = PFUser.currentUser()!["display_picture"] as? PFFile{
             self.newPoster!.file = image
             self.newPoster?.loadInBackground()
         }else{
@@ -170,7 +171,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
         }
         
         if let poster = self.getPFFileFromImage(self.newPoster.image) {
-            PFUser.currentUser()?.setObject(poster, forKey: "media")
+            PFUser.currentUser()?.setObject(poster, forKey: "display_picture")
         }
     
         
